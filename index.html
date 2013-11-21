@@ -15,9 +15,10 @@
                 </label>
                 <button>Submit your answer</button>
             </form>
-            <ul class="answers">
-                Answers go here
-            </ul>
+            <div class="answers">
+                <h2>Answers</h2>
+                <ul></ul>
+            </div>
         </section>
         <footer>
             Made by <a href="http://github.com/kotteavi">avi</a> &amp; <a href="http://github.com/cvan">cvan</a></a>
@@ -34,7 +35,6 @@
                 // Error checking for the form.
                 $('form button').prop('disabled', '');
                 function checkValid(form) {
-                    console.log('checkvalid');
                     if (form) {
                         $(form).find('button').prop('disabled', !form.checkValidity());
                     }
@@ -46,13 +46,21 @@
                     checkValid(this);
                 });
 
+                function escapeText(txt) {
+                    return document.createTextNode(txt).textContent;
+                }
+
                 var $answer = $('textarea[name=answer]');
                 var $button = $('button');
+                var $answers = $('.answers');
+                var $answersList = $answers.find('ul');
+
+                // Open a connection to firebase.
+                var answerRef = new Firebase('https://bantfire.firebaseio.com/answers');
 
                 // Process the form.
                 $('form').on('submit', function(evt) {
                     evt.preventDefault();
-                    var answerRef = new Firebase('https://bantfire.firebaseio.com/answers');
                     var newAnswerRef = answerRef.push();
 
                     // Post to firebase.
@@ -68,12 +76,38 @@
                     localStorage.submitted = '1';
 
                     // Render the answers.
-                    $('.answers').show();
+                    $answers.show();
                 });
 
                 if (localStorage.submitted) {
-                    $('.answers').show();
+                    $answers.show();
                 }
+
+                // Render answers.
+                answerRef.on('value', function(snapshot) {
+                    console.log('value');
+                });
+
+                answerRef.on('child_added', function(snapshot) {
+                    var name = snapshot.name();
+                    var val = snapshot.val();
+                    console.log('child_added', name, val);
+                    $answersList.prepend('<li data-id="' + name + '">' + escapeText(val.text) + '</li>');
+                });
+
+                answerRef.on('child_changed', function(snapshot) {
+                    var name = snapshot.name();
+                    var val = snapshot.val();
+                    console.log('child_changed', name, val);
+                    $answersList.find('li[data-id="' + name + '"]').text(val.text);
+                });
+
+                answerRef.on('child_removed', function(snapshot) {
+                    var name = snapshot.name();
+                    var val = snapshot.val();
+                    console.log('child_removed', name, val);
+                    $answersList.find('li[data-id="' + name + '"]').remove();
+                });
             })();
         </script>
     </body>

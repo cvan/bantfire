@@ -116,6 +116,10 @@ header {
     text-align: center;
 }
 
+h1, h2 {
+    font-family: "brandon-grotesque", sans-serif;
+}
+
 .question {
     color: #3a3;
     font-family: "brandon-grotesque";
@@ -213,10 +217,24 @@ label b {
 }
 
 .answers {
-    border-top: 1px solid #ccc;
     display: none;
+    border-top: 1px solid #ccc;
     margin: 3em auto 1em;
-    padding-top: 2em;
-    text-align: center;
+    padding-top: 3em;
     width: 720px;
+}
+
+h2 {
+    color: #666;
+    font-size: 32px;
+    margin: 0 0 1em;
+}
+
+.answers ul {
+}
+
+.answers li + li {
+    border-top: 1px solid #eee;
+    margin-top: 1em;
+    padding-top: 1em;
 }
