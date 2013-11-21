@@ -1,0 +1,222 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img,
+ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i,
+center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section,
+summary, time, mark, audio, video {
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+caption, th, td {
+    font-weight: normal;
+    text-align: left;
+    vertical-align: middle;
+}
+
+q, blockquote {
+    quotes: none;
+}
+
+q:before, q:after,
+blockquote:before, blockquote:after {
+    content: "";
+    content: none;
+}
+
+a img {
+    border: none
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu,
+nav, section, summary {
+    display: block;
+}
+
+img {
+    width: 100%;
+}
+
+
+img::selection {
+    background: transparent;
+}
+
+img::-moz-selection {
+    background: transparent;
+}
+
+/*
+input, button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+*/
+
+html, body {
+    height: 100%;
+}
+
+html {
+    background: #fff;
+}
+
+body {
+    -webkit-tap-highlight-color: rgba(255,0,0,.6);
+}
+
+/* >> The Magnificent CLEARFIX <<
+   Lifted from html5boilerplate.com
+   License is Public domain */
+.c:after { content: ""; display: block; height: 0; clear: both; visibility: hidden; }
+.c { display: inline-block; }
+* html .c { height: 1%; } /* Hides from IE-mac \*/
+.c { display: block; }
+
+* {
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+html, body {
+    background: #fff;
+    height: 100%;
+}
+
+body {
+    font: 14px "Open Sans", sans-serif;
+    font-size: 14px;
+    padding: 2em;
+}
+
+a {
+    color: #444;
+}
+
+header {
+    margin-top: 10em;
+    text-align: center;
+}
+
+.question {
+    color: #3a3;
+    font-family: "brandon-grotesque";
+    font-weight: 600;
+    font-size: 48px;
+}
+
+section {
+    padding: 2em 0 3em;
+}
+
+form {
+    margin: 0 auto;
+    text-align: center;
+    width: 800px;
+}
+
+footer {
+    display: none;
+    font-size: 80%;
+    opacity: 0.5;
+    text-align: center;
+}
+
+input[type=text],
+input[type=number],
+button,
+textarea {
+    .transition(~'.25s border, .5s box-shadow');
+    .box-shadow(-1px -1px 1px #eee inset, 1px 1px 1px #eee inset);
+    background: #fff;
+    border: 1px solid #999;
+    color: #666;
+    font: inherit;
+    font-size: 18px;
+    line-height: 24px;
+    margin: 0;
+    padding: 8px 10px;
+}
+
+button {
+    background: #999;
+    border-color: #666;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #666;
+    border-color: #333;
+}
+
+button[disabled] {
+    background: #eee;
+    border-color: #ccc;
+    color: #ccc;
+    cursor: default;
+}
+
+input[type=text]:focus,
+input[type=number]:focus {
+    .box-shadow(-1px -1px 1px #ddd inset, 1px 1px 1px #ddd inset);
+    background: lighten(#eee, 5%);
+    border-color: #777;
+    color: #000;
+    outline: 0;
+    outline: thin dotted \9;
+}
+
+input[type=text] {
+    text-align: center;
+}
+
+input[type=number] {
+    width: 75px;
+}
+
+textarea {
+    display: block;
+    margin: 0 auto 1em;
+    width: 90%;
+}
+
+label {
+    display: block;
+    vertical-align: top;
+}
+
+label b {
+    display: block;
+    font-size: 11px;
+    padding-bottom: .5em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.answers {
+    border-top: 1px solid #ccc;
+    display: none;
+    margin: 3em auto 1em;
+    padding-top: 2em;
+    text-align: center;
+    width: 720px;
+}

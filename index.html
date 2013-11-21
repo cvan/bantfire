@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>bantfire</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1 class="question">What do you say in an awkward elevator?</h1>
+        </header>
+        <section class="pay">
+            <form method="post">
+                <label>
+                    <textarea name="answer" required></textarea>
+                </label>
+                <button>Submit your answer</button>
+            </form>
+            <ul class="answers">
+                Answers go here
+            </ul>
+        </section>
+        <footer>
+            Made by <a href="http://github.com/kotteavi">avi</a> &amp; <a href="http://github.com/cvan">cvan</a></a>
+        </footer>
+
+        <script type="text/javascript" src="//use.typekit.net/kwe1wqx.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
+        <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
+        <script type="text/javascript">
+            // TODO: Sample for showing answers before and after.
+
+            (function() {
+                // Error checking for the form.
+                $('form button').prop('disabled', '');
+                function checkValid(form) {
+                    console.log('checkvalid');
+                    if (form) {
+                        $(form).find('button').prop('disabled', !form.checkValidity());
+                    }
+                }
+                $(document).on('change keyup paste', 'input, select, textarea', function(e) {
+                    checkValid(e.target.form);
+                });
+                $('form').each(function() {
+                    checkValid(this);
+                });
+
+                var $answer = $('textarea[name=answer]');
+                var $button = $('button');
+
+                // Process the form.
+                $('form').on('submit', function(evt) {
+                    evt.preventDefault();
+                    var answerRef = new Firebase('https://bantfire.firebaseio.com/answers');
+                    var newAnswerRef = answerRef.push();
+
+                    // Post to firebase.
+                    newAnswerRef.set({user: '', text: $answer.val()});
+
+                    // Clear the textbox.
+                    $answer.val('').trigger('change');
+
+                    // Remove focus from the submit button.
+                    $button.blur();
+
+                    // Remember whether the form was submitted.
+                    localStorage.submitted = '1';
+
+                    // Render the answers.
+                    $('.answers').show();
+                });
+
+                if (localStorage.submitted) {
+                    $('.answers').show();
+                }
+            })();
+        </script>
+    </body>
+</html>
