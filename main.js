@@ -19,6 +19,10 @@
         return div.innerHTML;
     }
 
+    function stripText(txt) {
+        return txt.replace(/\s+/g, ' ').replace(/\s$/g, '');
+    }
+
     var $answer = $('textarea[name=answer]');
     var $button = $('button');
     var $answers = $('.answers');
@@ -33,7 +37,7 @@
         var newAnswerRef = answerRef.push();
 
         // Post to firebase.
-        newAnswerRef.set({user: '', text: escapeText($answer.val())});
+        newAnswerRef.set({user: '', text: stripText(escapeText($answer.val()))});
 
         // Clear the textbox.
         $answer.val('').trigger('change');
