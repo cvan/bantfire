@@ -102,7 +102,7 @@ html, body {
 }
 
 body {
-    font: 14px "Open Sans", sans-serif;
+    font: 14px "brandon-grotesque", sans-serif;
     font-size: 14px;
     padding: 2em;
 }
@@ -116,9 +116,6 @@ header {
     text-align: center;
 }
 
-h1, h2 {
-    font-family: "brandon-grotesque", sans-serif;
-}
 
 .question {
     color: #3a3;

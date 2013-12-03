@@ -6,7 +6,7 @@
     </head>
     <body>
         <header>
-            <h1 class="question">What do you say in an awkward elevator?</h1>
+            <h1 class="question">How are you?</h1>
         </header>
         <section class="pay">
             <form method="post">
@@ -28,87 +28,6 @@
         <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
         <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
-        <script type="text/javascript">
-            // TODO: Sample for showing answers before and after.
-
-            (function() {
-                // Error checking for the form.
-                $('form button').prop('disabled', '');
-                function checkValid(form) {
-                    if (form) {
-                        $(form).find('button').prop('disabled', !form.checkValidity());
-                    }
-                }
-                $(document).on('change keyup paste', 'input, select, textarea', function(e) {
-                    checkValid(e.target.form);
-                });
-                $('form').each(function() {
-                    checkValid(this);
-                });
-
-                function escapeText(txt) {
-                    return document.createTextNode(txt).textContent;
-                }
-
-                var $answer = $('textarea[name=answer]');
-                var $button = $('button');
-                var $answers = $('.answers');
-                var $answersList = $answers.find('ul');
-
-                // Open a connection to firebase.
-                var answerRef = new Firebase('https://bantfire.firebaseio.com/answers');
-
-                // Process the form.
-                $('form').on('submit', function(evt) {
-                    evt.preventDefault();
-                    var newAnswerRef = answerRef.push();
-
-                    // Post to firebase.
-                    newAnswerRef.set({user: '', text: $answer.val()});
-
-                    // Clear the textbox.
-                    $answer.val('').trigger('change');
-
-                    // Remove focus from the submit button.
-                    $button.blur();
-
-                    // Remember whether the form was submitted.
-                    localStorage.submitted = '1';
-
-                    // Render the answers.
-                    $answers.show();
-                });
-
-                if (localStorage.submitted) {
-                    $answers.show();
-                }
-
-                // Render answers.
-                answerRef.on('value', function(snapshot) {
-                    console.log('value');
-                });
-
-                answerRef.on('child_added', function(snapshot) {
-                    var name = snapshot.name();
-                    var val = snapshot.val();
-                    console.log('child_added', name, val);
-                    $answersList.prepend('<li data-id="' + name + '">' + escapeText(val.text) + '</li>');
-                });
-
-                answerRef.on('child_changed', function(snapshot) {
-                    var name = snapshot.name();
-                    var val = snapshot.val();
-                    console.log('child_changed', name, val);
-                    $answersList.find('li[data-id="' + name + '"]').text(val.text);
-                });
-
-                answerRef.on('child_removed', function(snapshot) {
-                    var name = snapshot.name();
-                    var val = snapshot.val();
-                    console.log('child_removed', name, val);
-                    $answersList.find('li[data-id="' + name + '"]').remove();
-                });
-            })();
-        </script>
+        <script type="text/javascript" src="main.js"></script>
     </body>
 </html>
